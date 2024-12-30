@@ -1,6 +1,47 @@
-/* body, html, #root {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-} */
+/* Border Animation */
+@keyframes border-animation {
+  0% {
+    border-color: #b16573;
+    box-shadow: 0 0 10px #b16573, 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  25% {
+    border-color: #ff8c42;
+    box-shadow: 0 0 10px #ffb485, 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    border-color: #ffedde;
+    box-shadow: 0 0 10px #ffedde, 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  75% {
+    border-color: #ffffff;
+    box-shadow: 0 0 10px #ffffff, 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    border-color: #b16573;
+    box-shadow: 0 0 10px #b16573, 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+}
+
+.subscribe-button {
+  position: relative;
+  padding: 12px 24px;
+  font-size: 16px;
+  color: white;
+  background: rgba(177, 101, 115, 0.8); /* Add slight transparency */
+  backdrop-filter: blur(5px); /* Blur effect */
+  border: 2px solid #b16573;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  animation: border-animation 3s linear infinite; /* Border animation */
+  box-shadow: 0 0 10px #b16573, 0 0 20px rgba(255, 255, 255, 0.1); /* Glow effect */
+}
+
+.subscribe-button:hover {
+  background: rgba(41, 41, 41, 0.9); /* Darker background on hover */
+  color: #b16573; /* Text matches initial border */
+  /* transform: scale(1.05); Subtle scaling effect */
+  box-shadow: 0 0 15px #b16573, 0 0 30px rgba(255, 255, 255, 0.2); /* Enhanced glow */
+}
