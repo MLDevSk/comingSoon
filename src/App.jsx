@@ -1,8 +1,38 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
+import emailjs from '@emailjs/browser';
+import { useState } from 'react';
 
 function App() {
+  const [email, setEmail] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault(); // Prevent the page from refreshing on form submission
+    if (email.trim() === '') {
+      setStatusMessage('Please enter a valid email address.');
+      return;
+    }
+
+    // Replace with your email submission logic here
+    emailjs.send(
+      'service_cakmkdl',
+      'template_u7yfepg',
+       e.target,
+      'BN6UgsLprjA6Ey4o4'
+    )
+      .then(() => {
+        setStatusMessage(`Subscription successful! ${e.target.value}`);
+        console.log("Subscription successful!");
+        setEmail('');
+      })
+      .catch(() => {
+        setStatusMessage('Failed to subscribe. Please try again later.');
+      });
+  };
+
   return (
     <div
       style={{
@@ -25,7 +55,7 @@ function App() {
           src="https://lottie.host/ff19a623-a44f-4e87-aadd-5ed715e8933d/UUcymceAsy.lottie"
           loop
           autoplay
-          className="w-full max-w-4xl h-auto" // Increased size for a larger animation
+          className="w-full max-w-4xl h-auto"
         />
         <h1 className="font-bold text-4xl mt-10 tracking-widest text-center">
           COMING SOON
@@ -35,7 +65,7 @@ function App() {
         </p>
       </div>
 
-      {/* Email Subscription Box */}
+      {/* Email Subscription Form */}
       <div className="w-full flex justify-center py-10 bg-[#1E1E1E]">
         <div className="w-full max-w-md bg-[#2A2A2A] rounded-lg p-8 shadow-lg">
           <h2 className="text-2xl font-semibold text-center mb-4 text-white">
@@ -44,14 +74,26 @@ function App() {
           <p className="text-center text-gray-400 text-sm mb-6">
             Enter your email below to stay updated when we launch.
           </p>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="w-full px-4 py-2 rounded-md mb-4 text-black text-sm outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <button className="w-full py-2 subscribe-button bg-[#B16573] text-white rounded-md hover:bg-zinc-700 transition duration-200">
-            Subscribe
-          </button>
+          <form onSubmit={handleFormSubmit} className="space-y-4">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              // value={email}
+              name='email_from'
+              // onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 rounded-md text-black text-sm outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full py-2 bg-[#B16573] text-white rounded-md hover:bg-zinc-700 transition duration-200"
+            >
+              Subscribe
+            </button>
+          </form>
+          {statusMessage && (
+            <p className="text-center text-sm mt-4 text-gray-300">{statusMessage}</p>
+          )}
         </div>
       </div>
 
@@ -70,11 +112,7 @@ function App() {
               rel="noopener noreferrer"
               className="flex flex-col items-center"
             >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
-                alt="Instagram"
-                className="w-12 h-12 rounded-full hover:opacity-80 transition duration-200"
-              />
+              <FaInstagram className='w-12 h-12' />
               <p className="mt-2 text-sm text-gray-400">Instagram</p>
             </a>
             {/* LinkedIn */}
@@ -84,11 +122,7 @@ function App() {
               rel="noopener noreferrer"
               className="flex flex-col items-center"
             >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
-                alt="LinkedIn"
-                className="w-12 h-12 rounded-full hover:opacity-80 transition duration-200"
-              />
+              <FaLinkedin className='w-12 h-12' />
               <p className="mt-2 text-sm text-gray-400">LinkedIn</p>
             </a>
             {/* YouTube */}
@@ -98,11 +132,7 @@ function App() {
               rel="noopener noreferrer"
               className="flex flex-col items-center"
             >
-              <img
-                src="https://img.freepik.com/premium-vector/youtube-logo-with-red-square_876006-17.jpg?semt=ais_hybrid"
-                alt="YouTube"
-                className="w-12 h-12 rounded-full hover:opacity-80 transition duration-200"
-              />
+              <FaYoutube className='w-12 h-12' />
               <p className="mt-2 text-sm text-gray-400">YouTube</p>
             </a>
             {/* X (Twitter) */}
@@ -113,7 +143,7 @@ function App() {
               className="flex flex-col items-center"
             >
               <img
-                src="https://media.sketchfab.com/models/8a66de89107f44e2a9524f38d9ed7110/thumbnails/3cdfc6de78e84022936d3af7127a4ecf/79590e616bd349f6b6ee0e19bda3f14e.jpeg"
+                src='https://static.vecteezy.com/system/resources/previews/031/737/215/non_2x/twitter-new-logo-twitter-icons-new-twitter-logo-x-2023-x-social-media-icon-free-png.png'
                 alt="X"
                 className="w-12 h-12 rounded-full hover:opacity-80 transition duration-200"
               />

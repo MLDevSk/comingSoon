@@ -11,14 +11,21 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@lottiefiles/dotlottie-react": "^0.12.0",
     "@lottiefiles/react-lottie-player": "^3.5.4",
+    "@react-email/components": "^0.0.31",
+    "@react-email/render": "^1.0.3",
+    "@sendgrid/mail": "^8.1.4",
     "@splinetool/react-spline": "^4.0.0",
     "lottie-react": "^2.4.0",
+    "nodemailer": "^6.9.16",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-email": "^3.0.4",
+    "react-icons": "^5.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
