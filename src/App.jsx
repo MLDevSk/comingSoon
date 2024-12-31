@@ -9,18 +9,52 @@ function App() {
   const [email, setEmail] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
 
-  const handleFormSubmit = (e) => {
+  // Function to upload email to backend
+  const uploadEmail = async (email) => {
+    const url = "https://artfulway.onrender.com/api/users/uploadEmail";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 400 || response.status === 409) {
+          setStatusMessage("Email already exists. Please use a different one.");
+          return;
+        }
+        setStatusMessage("Server error. Please try again later.");
+        return;
+      }
+
+      setStatusMessage("Subscription successful!");
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setStatusMessage("Failed to subscribe. Please try again later.");
+    }
+  };
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault(); // Prevent the page from refreshing on form submission
+
     if (email.trim() === '') {
       setStatusMessage('Please enter a valid email address.');
       return;
     }
-  
-    // Define the template parameters for EmailJS
+
+    // Send email to the backend
+    await uploadEmail(email);
+
+    // Send email through EmailJS
     const templateParams = {
       email_from: email, // Replace 'email_from' with the key in your EmailJS template
     };
-  
+
     emailjs.send(
       'service_cakmkdl',
       'template_u7yfepg',
@@ -28,12 +62,11 @@ function App() {
       'BN6UgsLprjA6Ey4o4'
     )
       .then(() => {
-        setStatusMessage('Subscription successful!');
-        console.log('Subscription successful!');
+        console.log('Email sent successfully through EmailJS!');
         setEmail(''); // Clear the email input
       })
       .catch(() => {
-        setStatusMessage('Failed to subscribe. Please try again later.');
+        setStatusMessage('Failed to send email via EmailJS. Please try again later.');
       });
   };
 
@@ -79,11 +112,10 @@ function App() {
             Enter your email below to stay updated when we launch.
           </p>
           <form onSubmit={handleFormSubmit} className="space-y-4">
-          <input
+            <input
               type="email"
               placeholder="Enter your email"
               value={email}
-              name="email_from"
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 rounded-md text-black text-sm outline-none focus:ring-2 focus:ring-blue-500"
               required
@@ -116,7 +148,7 @@ function App() {
               rel="noopener noreferrer"
               className="flex flex-col items-center"
             >
-              <FaInstagram className='w-12 h-12' />
+              <FaInstagram className="w-12 h-12" />
               <p className="mt-2 text-sm text-gray-400">Instagram</p>
             </a>
             {/* LinkedIn */}
@@ -126,7 +158,7 @@ function App() {
               rel="noopener noreferrer"
               className="flex flex-col items-center"
             >
-              <FaLinkedin className='w-12 h-12' />
+              <FaLinkedin className="w-12 h-12" />
               <p className="mt-2 text-sm text-gray-400">LinkedIn</p>
             </a>
             {/* YouTube */}
@@ -136,7 +168,7 @@ function App() {
               rel="noopener noreferrer"
               className="flex flex-col items-center"
             >
-              <FaYoutube className='w-12 h-12' />
+              <FaYoutube className="w-12 h-12" />
               <p className="mt-2 text-sm text-gray-400">YouTube</p>
             </a>
             {/* X (Twitter) */}
@@ -147,7 +179,7 @@ function App() {
               className="flex flex-col items-center"
             >
               <img
-                src='https://static.vecteezy.com/system/resources/previews/031/737/215/non_2x/twitter-new-logo-twitter-icons-new-twitter-logo-x-2023-x-social-media-icon-free-png.png'
+                src="https://static.vecteezy.com/system/resources/previews/031/737/215/non_2x/twitter-new-logo-twitter-icons-new-twitter-logo-x-2023-x-social-media-icon-free-png.png"
                 alt="X"
                 className="w-12 h-12 rounded-full hover:opacity-80 transition duration-200"
               />
