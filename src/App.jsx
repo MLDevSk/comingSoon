@@ -86,7 +86,7 @@ function App() {
             />
             <button
               type="submit"
-              className="w-full py-2 bg-[#B16573] text-white rounded-md hover:bg-zinc-700 transition duration-200"
+              className="w-full py-2 bg-[#B16573] text-white rounded-md hover:bg-zinc-700 transition duration-200 subscribe-button"
             >
               Subscribe
             </button>
