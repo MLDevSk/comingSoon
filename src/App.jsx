@@ -15,18 +15,22 @@ function App() {
       setStatusMessage('Please enter a valid email address.');
       return;
     }
-
-    // Replace with your email submission logic here
+  
+    // Define the template parameters for EmailJS
+    const templateParams = {
+      email_from: email, // Replace 'email_from' with the key in your EmailJS template
+    };
+  
     emailjs.send(
       'service_cakmkdl',
       'template_u7yfepg',
-       e.target,
+      templateParams, // Pass the email object here
       'BN6UgsLprjA6Ey4o4'
     )
       .then(() => {
-        setStatusMessage(`Subscription successful! ${e.target.value}`);
-        console.log("Subscription successful!");
-        setEmail('');
+        setStatusMessage('Subscription successful!');
+        console.log('Subscription successful!');
+        setEmail(''); // Clear the email input
       })
       .catch(() => {
         setStatusMessage('Failed to subscribe. Please try again later.');
@@ -75,12 +79,12 @@ function App() {
             Enter your email below to stay updated when we launch.
           </p>
           <form onSubmit={handleFormSubmit} className="space-y-4">
-            <input
+          <input
               type="email"
               placeholder="Enter your email"
-              // value={email}
-              name='email_from'
-              // onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              name="email_from"
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 rounded-md text-black text-sm outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
