@@ -52,14 +52,14 @@ function App() {
 
     // Send email through EmailJS
     const templateParams = {
-      email_from: email, // Replace 'email_from' with the key in your EmailJS template
+      template_flebnup: email, // Replace 'email_from' with the key in your EmailJS template
     };
 
     emailjs.send(
-      'service_cakmkdl',
-      'template_u7yfepg',
+      'service_ro7e11j',
+      'template_flebnup',
       templateParams, // Pass the email object here
-      'BN6UgsLprjA6Ey4o4'
+      'pSeYg99Pxha1pRmDH'
     )
       .then(() => {
         console.log('Email sent successfully through EmailJS!');
@@ -191,10 +191,10 @@ function App() {
           <div className="mt-10">
             <h4 className="text-lg font-semibold text-gray-300 mb-2">Contact Us</h4>
             <a
-              href="mailto:office@artfulway.in"
+              href="mailto:hello@artfulway.in"
               className="text-blue-500 text-md hover:underline"
             >
-              office@artfulway.in
+              hello@artfulway.in
             </a>
           </div>
         </div>
